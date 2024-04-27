@@ -1,0 +1,18 @@
+.galleryList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  max-width: 1440px;
+  padding: 32px 15px 36px;
+}
+
+.galleryItem {
+  display: block;
+  box-sizing: border-box;
+  width: 360px;
+
+  border: 1px solid #4841416c;
+  border-radius: 8px;
+  overflow: hidden;
+}
