@@ -7,19 +7,19 @@ import toast, { Toaster } from "react-hot-toast";
 import SearchBar from "../SearchBar/SearchBar";
 import { getPhotosByQuery } from "../servises/api";
 import ImageModal from "../ImageModal/ImageModal";
-import "./App.css";
+import "./App.module.css";
 
 function App() {
   const [photos, setPhotos] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [loadMoreBtn, setLoadMoreBtn] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [loadMoreBtn, setLoadMoreBtn] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [selectedPhoto, setSelectedPhoto] = useState({});
 
-  const onSetSearchQuery = (query) => {
+  const onSetSearchQuery = (query: string) => {
     setSearchQuery(query);
     setPage(1);
     setPhotos([]);
