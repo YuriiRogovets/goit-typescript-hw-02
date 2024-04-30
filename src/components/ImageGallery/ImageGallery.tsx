@@ -10,15 +10,17 @@ interface ImageGalleryProps {
 
 const ImageGallery: FC<ImageGalleryProps> = ({ photos, onSelect }) => {
   return (
-    <ul className={css.galleryList}>
-      {photos.map((item) => {
-        return (
-          <li className={css.galleryItem} key={item.id}>
-            <ImageCard photo={item} onSelect={onSelect} />
-          </li>
-        );
-      })}
-    </ul>
+    <div className={css.galleryWrapp}>
+      <ul className={css.galleryList}>
+        {photos.map((item) => {
+          return (
+            <li className={css.galleryItem} key={item.id}>
+              <ImageCard photo={item} onSelect={onSelect} />
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 

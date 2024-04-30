@@ -1,3 +1,8 @@
+.galleryWrapp {
+  display: flex;
+  justify-content: center;
+}
+
 .galleryList {
   display: flex;
   flex-wrap: wrap;
