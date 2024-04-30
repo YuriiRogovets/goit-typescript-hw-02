@@ -1,7 +1,14 @@
+import { FC } from "react";
 import ImageCard from "../ImageCard/ImageCard";
+import { Photo } from "../servises/types";
 import css from "./ImageGallery.module.css";
 
-const ImageGallery = ({ photos, onSelect }) => {
+interface ImageGalleryProps {
+  photos: Photo[];
+  onSelect: (photo: Photo) => void;
+}
+
+const ImageGallery: FC<ImageGalleryProps> = ({ photos, onSelect }) => {
   return (
     <ul className={css.galleryList}>
       {photos.map((item) => {

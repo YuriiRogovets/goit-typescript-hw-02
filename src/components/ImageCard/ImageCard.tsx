@@ -1,12 +1,19 @@
+import { FC } from "react";
+import { Photo } from "../servises/types";
 import css from "./ImageCard.module.css";
 
-function ImageCard({ photo, onSelect }) {
+interface ImageCardProps {
+  photo: Photo;
+  onSelect: (photo: Photo) => void;
+}
+
+const ImageCard: FC<ImageCardProps> = ({ photo, onSelect }) => {
   return (
     <div
       className={css.imageCard}
       onClick={() => {
         // console.log(photo);
-        onSelect(true, photo);
+        onSelect(photo);
       }}
     >
       <img
@@ -17,6 +24,6 @@ function ImageCard({ photo, onSelect }) {
       />
     </div>
   );
-}
+};
 
 export default ImageCard;

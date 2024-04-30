@@ -1,4 +1,6 @@
 import Modal from "react-modal";
+import { Photo } from "../servises/types";
+import { FC } from "react";
 const customStyles = {
   content: {
     top: "50%",
@@ -11,9 +13,19 @@ const customStyles = {
   },
 };
 
+interface ImageModalProps {
+  photo: Photo | null;
+  isOpen: boolean;
+  closeModal: (state: boolean) => void;
+}
+
 Modal.setAppElement("#root");
 
-function ImageModal({ photo, isOpen = false, closeModal }) {
+const ImageModal: FC<ImageModalProps> = ({
+  photo,
+  isOpen = false,
+  closeModal,
+}) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -23,11 +35,9 @@ function ImageModal({ photo, isOpen = false, closeModal }) {
       shouldCloseOnEsc={true}
       preventScroll={true}
     >
-      {photo.urls && (
-        <img src={photo.urls.regular} alt={photo.alt_description} />
-      )}
+      {photo && <img src={photo.urls.regular} alt={photo.alt_description} />}
     </Modal>
   );
-}
+};
 
 export default ImageModal;

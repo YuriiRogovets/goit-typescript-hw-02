@@ -1,7 +1,13 @@
 import { Formik, Form, Field } from "formik";
 import css from "./SearchBar.module.css";
+import { FC } from "react";
 
-const SearchBar = ({ onSetSearchQuery, onMessage }) => {
+interface SearchBarProps {
+  onSetSearchQuery: (query: string) => void;
+  onMessage: () => void;
+}
+
+const SearchBar: FC<SearchBarProps> = ({ onSetSearchQuery, onMessage }) => {
   return (
     <header>
       <Formik

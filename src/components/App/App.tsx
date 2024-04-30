@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
@@ -7,19 +7,27 @@ import toast, { Toaster } from "react-hot-toast";
 import SearchBar from "../SearchBar/SearchBar";
 import { getPhotosByQuery } from "../servises/api";
 import ImageModal from "../ImageModal/ImageModal";
+import { Photo } from "../servises/types";
 import "./App.module.css";
 
-function App() {
-  const [photos, setPhotos] = useState([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [loadMoreBtn, setLoadMoreBtn] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [page, setPage] = useState<number>(1);
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  const [selectedPhoto, setSelectedPhoto] = useState({});
+interface Data {
+  results: Photo[];
+  total: number;
+  total_pages: number;
+}
 
-  const onSetSearchQuery = (query: string) => {
+function App() {
+  const [photos, setPhotos] = useState<Photo[]>([]); //ok
+  const [loading, setLoading] = useState<boolean>(false); //ok
+  const [loadMoreBtn, setLoadMoreBtn] = useState<boolean>(false); //ok
+  const [isError, setIsError] = useState<boolean>(false); //ok
+  const [searchQuery, setSearchQuery] = useState<string>(""); //ok
+  const [page, setPage] = useState<number>(1); //ok
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false); //ok
+  const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null); //ok
+
+  const onSetSearchQuery = (query: string): void => {
+    //ok
     setSearchQuery(query);
     setPage(1);
     setPhotos([]);
@@ -34,7 +42,7 @@ function App() {
       setIsError(false);
 
       try {
-        const { data } = await getPhotosByQuery(searchQuery, page);
+        const data: Data = await getPhotosByQuery(searchQuery, page);
 
         setPhotos((prevPhoto) => {
           return [...prevPhoto, ...data.results];
@@ -54,10 +62,9 @@ function App() {
     setPage(page + 1);
   };
 
-  function openModal(state, photo) {
+  function openModal(photo: Photo): void {
     setIsOpenModal(true);
     setSelectedPhoto(photo);
-    console.log(photo);
   }
 
   function closeModal() {
